@@ -1,0 +1,702 @@
+{
+  "name": "FormAutomation",
+  "nodes": [
+    {
+      "parameters": {
+        "sendTo": "={{ $('Formulaire contact').item.json['E-Mail'] }}",
+        "subject": "MBM - Votre demande à bien été enregistrée",
+        "emailType": "text",
+        "message": "=Bonjour {{ $('Formulaire contact').item.json['Nom et prénom'] }}, \n\nMerci d'avoir pris contact avec moi pour votre projet, j'ai bien bien reçu votre demande pour une retouche.\n\nJe vous contacterais dans un délais de maximum 7 jours ouvré afin que nous discutions plus en détail des retouches dont vous avez besoin.\n\nCordialement,\n\nLéa Zabinski\nMissByMisstinguette",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        -144
+      ],
+      "id": "fde9dcb1-7aeb-4072-a1cb-b5913e6e2aea",
+      "name": "Retouche",
+      "webhookId": "4eeebb14-ff5b-46bc-918e-c19941ce40c2",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "[creds ID]",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Formulaire contact').item.json['E-Mail'] }}",
+        "subject": "MBM - Votre demande à bien été enregistrée",
+        "emailType": "text",
+        "message": "=Bonjour {{ $('Formulaire contact').item.json['Nom et prénom'] }},\n\nMerci d'avoir pris contact avec moi pour votre projet, j'ai bien bien reçu votre demande pour une création sur mesure.\n\nJe vous contacterais dans un délais de maximum 7 jours ouvré afin que nous discutions plus en détail de votre future tenue sur mesure.\n\nCordialement,\n\nLéa Zabinski\nMissByMisstinguette",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        16
+      ],
+      "id": "7654555d-327e-40f1-951d-67616084fbc2",
+      "name": "Sur mesure",
+      "webhookId": "4eeebb14-ff5b-46bc-918e-c19941ce40c2",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "[creds ID]",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Formulaire contact').item.json['E-Mail'] }}",
+        "subject": "MBM - Votre demande à bien été enregistrée",
+        "emailType": "text",
+        "message": "=Bonjour {{ $('Formulaire contact').item.json['Nom et prénom'] }}, \n\nMerci d'avoir pris contact avec moi pour votre projet, j'ai bien bien reçu votre demande pour une création originale.\n\nJe vous contacterais dans un délais de maximum 7 jours afin que nous discutions plus en détail l'unviers dans lequel votre costume doit correspondre.\n\nCordialement,\n\nLéa Zabinski\nMissByMisstinguette",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        672,
+        176
+      ],
+      "id": "0ff0b6f7-15a4-4fde-91c7-162c64955d1d",
+      "name": "Création originale/Spectacle",
+      "webhookId": "4eeebb14-ff5b-46bc-918e-c19941ce40c2",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "[creds ID]",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "[docs URL]",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Feuille 1",
+          "cachedResultUrl": "[docs URL]"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nom et Prénom": "={{ $('Formulaire contact').item.json['Nom et prénom'] }}",
+            "Numéro de téléphone": "={{ $('Formulaire contact').item.json['Numéro de téléphone'] }}",
+            "E-Mail": "={{ $('Formulaire contact').item.json['E-Mail'] }}",
+            "Demande": "={{ $('Formulaire contact').item.json['Nature de votre demande'] }}",
+            "Description du projet": "={{ $('Formulaire contact').item.json['Décrivez moi votre projet'] }}",
+            "Date de la demande": "={{ DateTime.fromISO($('Formulaire contact').item.json.submittedAt).toFormat('dd-MM-yyyy') }}",
+            "Recontacter avant le ": "={{ $('CalculDateContact').item.json.dateRecontact }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nom et Prénom",
+              "displayName": "Nom et Prénom",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Numéro de téléphone",
+              "displayName": "Numéro de téléphone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "E-Mail",
+              "displayName": "E-Mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Demande",
+              "displayName": "Demande",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Description du projet",
+              "displayName": "Description du projet",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Date de la demande",
+              "displayName": "Date de la demande",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Recontacter avant le ",
+              "displayName": "Recontacter avant le ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        896,
+        -144
+      ],
+      "id": "ae78f67f-9b8e-45ce-bc44-29c992d2db8c",
+      "name": "Ajouter Retouche",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "[creds ID]",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "[docs URL]",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Feuille 1",
+          "cachedResultUrl": "[docs URL]"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nom et Prénom": "={{ $('Formulaire contact').item.json['Nom et prénom'] }}",
+            "Numéro de téléphone": "={{ $('Formulaire contact').item.json['Numéro de téléphone'] }}",
+            "E-Mail": "={{ $('Formulaire contact').item.json['E-Mail'] }}",
+            "Demande": "={{ $('Formulaire contact').item.json['Nature de votre demande'] }}",
+            "Description du projet": "={{ $('Formulaire contact').item.json['Décrivez moi votre projet'] }}",
+            "Date de la demande": "={{ $('CalculDateContact').item.json.dateRecontact }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nom et Prénom",
+              "displayName": "Nom et Prénom",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Numéro de téléphone",
+              "displayName": "Numéro de téléphone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "E-Mail",
+              "displayName": "E-Mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Demande",
+              "displayName": "Demande",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Description du projet",
+              "displayName": "Description du projet",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Date de la demande",
+              "displayName": "Date de la demande",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Recontacter avant le ",
+              "displayName": "Recontacter avant le ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        896,
+        16
+      ],
+      "id": "a19ed311-ca4c-4263-852a-489ef17bb8bb",
+      "name": "Ajouter sur mesure",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "[Creds ID]",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "[docs URL]",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Feuille 1",
+          "cachedResultUrl": "[docs URL]"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nom et Prénom": "={{ $('Formulaire contact').item.json['Nom et prénom'] }}",
+            "Numéro de téléphone": "={{ $('Formulaire contact').item.json['Numéro de téléphone'] }}",
+            "E-Mail": "={{ $('Formulaire contact').item.json['E-Mail'] }}",
+            "Demande": "={{ $('Formulaire contact').item.json['Nature de votre demande'] }}",
+            "Description du projet": "={{ $('Formulaire contact').item.json['Décrivez moi votre projet'] }}",
+            "Date de la demande": "={{ $('CalculDateContact').item.json.dateRecontact }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nom et Prénom",
+              "displayName": "Nom et Prénom",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Numéro de téléphone",
+              "displayName": "Numéro de téléphone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "E-Mail",
+              "displayName": "E-Mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Demande",
+              "displayName": "Demande",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Description du projet",
+              "displayName": "Description du projet",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Date de la demande",
+              "displayName": "Date de la demande",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Recontacter avant le ",
+              "displayName": "Recontacter avant le ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "cellFormat": "USER_ENTERED"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        896,
+        176
+      ],
+      "id": "8da8c9a8-7ced-40d8-9d2f-91779f40c088",
+      "name": "Ajouter création originale/spectacle",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "[Creds ID]",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Formulaire contact').item.json['Nature de votre demande'][0] }}",
+                    "rightValue": "=Retouche",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "8f2a3e36-35a8-41ed-ab41-768dc958222b"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Retouche"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "47ebd8ed-0873-4181-9a50-8ccf686a24ec",
+                    "leftValue": "={{ $('Formulaire contact').item.json['Nature de votre demande'][0] }}",
+                    "rightValue": "=Sur mesure",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Sur mesure"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "699a27cb-8752-4be8-a978-9c0db073240f",
+                    "leftValue": "={{ $('Formulaire contact').item.json['Nature de votre demande'][0] }}",
+                    "rightValue": "=Création originale/Spectacle",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Création originale"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.5,
+      "position": [
+        448,
+        0
+      ],
+      "id": "f105dbba-4a04-41ba-9882-6e4feaff813e",
+      "name": "Demande client"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Récupère la date de soumission\nconst submittedAt = $('Formulaire contact').item.json.submittedAt;\nlet dt = DateTime.fromISO(submittedAt);\n\nlet addedDays = 0;\nwhile (addedDays < 7) {\n  dt = dt.plus({ days: 1 });\n  // Si ce n'est ni samedi (6) ni dimanche (7), on incrémente\n  if (dt.weekday <= 5) {\n    addedDays++;\n  }\n}\n\n// Retourne la nouvelle date formatée\nreturn [{ json: { dateRecontact: dt.toFormat('dd-MM-yyyy') } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        224,
+        16
+      ],
+      "id": "9c144ece-4305-4272-b905-bc7c63b977b9",
+      "name": "CalculDateContact"
+    },
+    {
+      "parameters": {
+        "formTitle": "Me contacter",
+        "formDescription": "Demande de création sur mesure où retouche.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Nom et prénom"
+            },
+            {
+              "fieldLabel": "Numéro de téléphone",
+              "fieldType": "number"
+            },
+            {
+              "fieldLabel": "E-Mail",
+              "fieldType": "email"
+            },
+            {
+              "fieldLabel": "Nature de votre demande",
+              "fieldType": "checkbox",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Retouche"
+                  },
+                  {
+                    "option": "Sur mesure"
+                  },
+                  {
+                    "option": "Création originale/Spectacle"
+                  }
+                ]
+              },
+              "limitSelection": "exact"
+            },
+            {
+              "fieldLabel": "Décrivez moi votre projet",
+              "fieldType": "textarea"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        0,
+        16
+      ],
+      "id": "1e97c6cc-d976-4653-a4b1-0ac007db2e9f",
+      "name": "Formulaire contact",
+      "webhookId": "d3a51cd8-b730-4a40-b4f7-86db7a51c797"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Retouche": {
+      "main": [
+        [
+          {
+            "node": "Ajouter Retouche",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Sur mesure": {
+      "main": [
+        [
+          {
+            "node": "Ajouter sur mesure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Création originale/Spectacle": {
+      "main": [
+        [
+          {
+            "node": "Ajouter création originale/spectacle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ajouter Retouche": {
+      "main": [
+        []
+      ]
+    },
+    "Demande client": {
+      "main": [
+        [
+          {
+            "node": "Retouche",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Sur mesure",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Création originale/Spectacle",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "CalculDateContact": {
+      "main": [
+        [
+          {
+            "node": "Demande client",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formulaire contact": {
+      "main": [
+        [
+          {
+            "node": "CalculDateContact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "12af40a1-9b4f-4e8d-a306-172684e3fa2c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "2e7e419feeff8e7f3d332637cc56b289dbd4d72ba973a6ee11e0dbd8cb373012"
+  },
+  "nodeGroups": [],
+  "id": "e0l6UxKkKgffth2D",
+  "tags": []
+}
